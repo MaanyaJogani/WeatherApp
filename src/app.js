@@ -30,6 +30,14 @@ app.get('', (req, res) => {
     })
 });
 
+// home page
+app.get('/home', (req, res) => {
+    res.render('index', {
+        title: 'Weather App',
+        body: 'Weather App'
+    })
+});
+
 // about page
 app.get('/about', (req, res) => {
     res.render('about', {
