@@ -50,7 +50,7 @@ const onsubmit = (e) => {
     if(place.value) {
         
         // fetch data from the weather page
-        fetch(`http://localhost:3000/weather?address=${place.value}`)
+        fetch(`/weather?address=${place.value}`)
             .then((response) => {
                 response.json()
                     .then((data) => {

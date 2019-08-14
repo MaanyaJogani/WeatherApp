@@ -1,25 +1,26 @@
 // Themain app.js
 
-const path = require('path')
-const express = require('express')
-const hbs = require('hbs')
-const geocode = require('./utils/geocode')
-const forecast = require('./utils/forecast')
+const path = require('path');
+const express = require('express');
+const hbs = require('hbs');
+const geocode = require('./utils/geocode');
+const forecast = require('./utils/forecast');
 
-const app = express()
+const app = express();
+const port = process.env.PORT || 3000;
 
 // define paths for express configuration
-const indexDirectoryPath = path.join(__dirname, '../Public')
-const viewsDirectoryPath = path.join(__dirname, '../templates/views')
-const partialsDirectoryPath = path.join(__dirname, '../templates/partials')
+const indexDirectoryPath = path.join(__dirname, '../Public');
+const viewsDirectoryPath = path.join(__dirname, '../templates/views');
+const partialsDirectoryPath = path.join(__dirname, '../templates/partials');
 
 // set up Handlebars engine and views location
 app.set('view engine', 'hbs');
-app.set('views', viewsDirectoryPath)
-hbs.registerPartials(partialsDirectoryPath)
+app.set('views', viewsDirectoryPath);
+hbs.registerPartials(partialsDirectoryPath);
 
 // set up static directory to serve
-app.use(express.static(indexDirectoryPath))
+app.use(express.static(indexDirectoryPath));
 
 // home page
 app.get('', (req, res) => {
@@ -27,7 +28,7 @@ app.get('', (req, res) => {
         title: 'Weather App',
         body: 'Weather App'
     })
-})
+});
 
 // about page
 app.get('/about', (req, res) => {
@@ -35,7 +36,7 @@ app.get('/about', (req, res) => {
         title: 'About Page',
         body: 'This a dynamic About Page'
     })
-})
+});
 
 
 // help page
@@ -44,7 +45,7 @@ app.get('/help', (req, res) => {
         title: 'Help Page',
         body: 'This a dynamic Help Page'
     })
-})
+});
 
 
 // weather page
@@ -95,7 +96,7 @@ app.get('/weather', (req, res) => {
             })
         }
     })
-})
+});
 
 // wrong help page
 app.get('/help*', (req, res) => {
@@ -103,7 +104,7 @@ app.get('/help*', (req, res) => {
         title: 'HELP Error 404',
         body: 'Help Page not Found'
     })
-})
+});
 
 
 // any other address that is not defined
@@ -112,9 +113,9 @@ app.get('/*', (req, res) => {
         title: 'Error 404',
         body: 'Page not Found'
     })
-})
+});
 
 // start the app at port 3000
-app.listen(3000, () => {
-    console.log("App started")
-})
+app.listen(port, () => {
+    console.log("App started in Port " + port);
+});
